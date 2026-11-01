@@ -1,2 +1,21 @@
-<?xml version='1.0' encoding='utf-8'?>
-<ns0:urlset xmlns:ns0="http://www.sitemaps.org/schemas/sitemap/0.9"><ns0:url><ns0:loc>https://aurasolutions.co.uk/asset-management.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/drainage-installation.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/gully-interceptor-maintenance.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/hazardous-liquid-waste.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/liquid-waste-collection.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/pump-station-maintenance.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/septic-tank-installation.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/sewage-treatment-systems.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/waste-management.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/domestic-asset-management.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/commercial-asset-management.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/estates-shared-site-management.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/developer-adoption-management.html</ns0:loc><ns0:lastmod>2026-09-30</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/civils-installations.html</ns0:loc><ns0:lastmod>2026-10-01</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/industrial-services.html</ns0:loc><ns0:lastmod>2026-10-01</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/gully-interceptor-installation.html</ns0:loc><ns0:lastmod>2026-10-01</ns0:lastmod></ns0:url><ns0:url><ns0:loc>https://aurasolutions.co.uk/smart-telemetry-monitoring.html</ns0:loc><ns0:lastmod>2026-10-01</ns0:lastmod></ns0:url></ns0:urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aurasolutions.co.uk/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/asset-management.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/asset-service-agreements.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/civils-installations.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/commercial-asset-management.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/developer-adoption-management.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/domestic-asset-management.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/drainage-installation.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/estates-shared-site-management.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/gully-interceptor-maintenance.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/hazardous-liquid-waste.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/industrial-services.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/liquid-waste-collection.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/pump-station-maintenance.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/septic-tank-installation.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/sewage-treatment-systems.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/smart-telemetry-monitoring.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://aurasolutions.co.uk/waste-management.html</loc><lastmod>2026-11-01</lastmod></url>
+</urlset>
