@@ -1,7 +1,7 @@
 const menuButton = document.querySelector('.menu-button');
 const nav = document.querySelector('.primary-nav');
 const groups = [...document.querySelectorAll('.nav-group')];
-const hoverNavigation = window.matchMedia('(min-width: 901px) and (hover: hover)');
+const hoverNavigation = window.matchMedia('(min-width: 1181px) and (hover: hover)');
 function setGroup(group, open) {
   group.classList.toggle('is-open', open);
   const button = group.querySelector('.dropdown-toggle');
@@ -35,7 +35,7 @@ groups.forEach(group => {
   group.addEventListener('focusin', event => {
     if (event.target.matches('.nav-group-heading > a')) {
       closeGroups(group);
-      if (window.matchMedia('(min-width: 901px)').matches) setGroup(group, true);
+      if (window.matchMedia('(min-width: 1181px)').matches) setGroup(group, true);
     }
   });
   group.addEventListener('focusout', event => {

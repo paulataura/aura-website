@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /drafts/
+Disallow: /tools/
 
 Sitemap: https://aurasolutions.co.uk/sitemap.xml

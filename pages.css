@@ -65,3 +65,9 @@ a.card:hover{border-color:var(--lime);transform:translateY(-2px)}
 
 @media(max-width:1100px){.card-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.page-hero-inner,.split{grid-template-columns:1fr;gap:34px;padding-block:50px}.split{padding-block:0}.card-grid,.card-grid.two,.steps{grid-template-columns:1fr}.block{padding-block:64px}.nudge{flex-direction:column;align-items:start;padding:32px 26px}}
+/* Login to the job app */
+.header-login{display:flex;align-items:center;gap:7px;flex:none;font-weight:700;font-size:.88rem;text-decoration:none;color:var(--forest);border:1.5px solid var(--forest);border-radius:6px;padding:11px 14px;white-space:nowrap}
+.header-login:hover{background:var(--forest);color:#fff}
+.primary-nav .nav-login{display:none}
+@media(min-width:901px) and (max-width:1380px){.header-login{padding:9px 11px;font-size:.8rem}.header-cta{padding:10px 12px;font-size:.82rem}}
+@media(max-width:1180px){.header-login{display:none}.primary-nav .nav-login{display:block;font-weight:800;color:var(--forest)}}

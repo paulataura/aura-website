@@ -85,7 +85,7 @@ def nav_html(current):
             f'<div class="nav-group"><div class="nav-group-heading"><a href="{href}">{e(label)}</a>'
             f'<button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="{sid}" aria-label="Show {e(label)}"><span aria-hidden="true">⌄</span></button></div>'
             f'<div class="nav-dropdown" id="{sid}">{links}</div></div>')
-    parts.append('<a href="about.html">About</a><a href="contact.html">Contact</a>')
+    parts.append('<a href="about.html">About</a><a href="contact.html">Contact</a><a class="nav-login" href="https://app.aurasolutions.co.uk/">Log in</a>')
     return "".join(parts)
 
 
@@ -159,6 +159,7 @@ def page(*, path, title, description, body, current=None, crumbs=None, noindex=F
       <a class="brand" href="index.html" aria-label="ASG Aura Solutions Group, home"><span class="brand-art" aria-hidden="true"></span></a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
       <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">{nav_html(current or path)}</nav>
+      <a class="header-login" href="https://app.aurasolutions.co.uk/" aria-label="Log in to the Aura job system"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Log in</a>
       <a class="header-cta" href="#enquire">Talk to an expert</a>
     </div>
   </header>
