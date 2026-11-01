@@ -89,9 +89,10 @@ def nav_html(current):
     return "".join(parts)
 
 
-def enquiry_html(source, heading="Tell us what needs attention.", intro=None):
+def enquiry_html(source, heading="Tell us what needs attention.", intro=None, service=None):
     intro = intro or "A quick description is all we need to get started. We'll come back to you to talk it through. No pushy sales pitch, just honest advice."
-    opts = "".join(f"<option>{e(o)}</option>" for o in SERVICES_SELECT)
+    opts = '<option value="">Choose a service</option>' + "".join(
+        f'<option{" selected" if o == service else ""}>{e(o)}</option>' for o in SERVICES_SELECT)
     return f'''<section class="enquiry" id="enquire" aria-labelledby="enquire-title">
       <div class="wrap enquiry-grid">
         <div class="enquiry-intro"><p class="eyebrow">Get in touch</p><h2 id="enquire-title">{e(heading)}</h2><p>{e(intro)}</p><p class="contact-phone"><a href="tel:{TEL}">{PHONE}</a></p><p class="contact-email"><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
@@ -113,11 +114,11 @@ def enquiry_html(source, heading="Tell us what needs attention.", intro=None):
 
 
 FORM_JS = """<script>
-(function(){const t0=Date.now();document.querySelectorAll('form[data-enquiry]').forEach(function(f){f.addEventListener('submit',async function(ev){ev.preventDefault();const s=f.querySelector('.form-status'),b=f.querySelector('button[type=submit]');const d=Object.fromEntries(new FormData(f));if(!d.name||!d.phone){s.className='form-status err';s.textContent='Please add your name and phone number.';return}b.disabled=true;s.className='form-status';s.textContent='Sending...';d.source_page=location.pathname+' ('+f.dataset.source+')';d.elapsed_ms=Date.now()-t0;try{const r=await fetch('%s',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});const j=await r.json();if(r.ok&&j.ok){f.reset();s.className='form-status ok';s.textContent='Thanks, we have your enquiry and will be in touch shortly. For emergencies please call %s.'}else throw 0}catch(_){s.className='form-status err';s.innerHTML='Sorry, that didn\\'t send. Please call %s or email <a href="mailto:%s">%s</a>.'}b.disabled=false})})})();
+(function(){const t0=Date.now();document.querySelectorAll('form[data-enquiry]').forEach(function(f){f.addEventListener('submit',async function(ev){ev.preventDefault();const s=f.querySelector('.form-status'),b=f.querySelector('button[type=submit]');const d=Object.fromEntries(new FormData(f));if(!d.name||!d.phone){s.className='form-status err';s.textContent='Please add your name and phone number.';return}b.disabled=true;s.className='form-status';s.textContent='Sending...';d.source_page=f.dataset.source+' page ('+location.pathname+')';d.elapsed_ms=Date.now()-t0;try{const r=await fetch('%s',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});const j=await r.json();if(r.ok&&j.ok){f.reset();s.className='form-status ok';s.textContent='Thanks, we have your enquiry and will be in touch shortly. For emergencies please call %s.'}else throw 0}catch(_){s.className='form-status err';s.innerHTML='Sorry, that didn\\'t send. Please call %s or email <a href="mailto:%s">%s</a>.'}b.disabled=false})})})();
 </script>""" % (ENQUIRY_ENDPOINT, PHONE, PHONE, EMAIL, EMAIL)
 
 
-def page(*, path, title, description, body, current=None, crumbs=None, noindex=False, extra_ld=None, og_image="assets/liquid-waste-collection-final.webp", source=None, enquiry=True, enquiry_heading=None):
+def page(*, path, title, description, body, current=None, crumbs=None, noindex=False, extra_ld=None, og_image="assets/liquid-waste-collection-final.webp", source=None, enquiry=True, enquiry_heading=None, service=None):
     url = f"{SITE}/" + ("" if path == "index.html" else path)
     ld = [{"@type": "Organization", "@id": f"{SITE}/#organization", "name": "Aura Solutions Group", "legalName": "Aura Solutions Group Limited", "alternateName": "ASG", "url": f"{SITE}/", "telephone": TEL, "email": EMAIL,
            "address": {"@type": "PostalAddress", "streetAddress": "Main Street", "addressLocality": "Sedgeberrow, Evesham", "addressRegion": "Worcestershire", "postalCode": "WR11 7UH", "addressCountry": "GB"},
@@ -131,7 +132,9 @@ def page(*, path, title, description, body, current=None, crumbs=None, noindex=F
         ld.extend(extra_ld)
     ld_json = json.dumps({"@context": "https://schema.org", "@graph": ld}, separators=(",", ":"))
     robots = '<meta name="robots" content="noindex, nofollow">\n  ' if noindex else ""
-    enq = enquiry_html(source or path, enquiry_heading or "Tell us what needs attention.") if enquiry else ""
+    if not source:
+        source = crumbs[-1][0] if crumbs else ("Home" if path == "index.html" else path)
+    enq = enquiry_html(source, enquiry_heading or "Tell us what needs attention.", service=service) if enquiry else ""
     return f'''<!doctype html>
 <html lang="en-GB">
 <head>

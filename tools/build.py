@@ -773,6 +773,29 @@ DESCRIPTIONS = {
     "liquid-waste.html": "Wastewater, sewage, process liquids, interceptor waste and tank contents collected and disposed of properly around Evesham and Worcestershire.",
 }
 
+# Service pre-selected in each page's enquiry form
+SERVICE_DEFAULT = {
+    "asset-management.html": "Asset management / ongoing care",
+    "estates.html": "Asset management / ongoing care",
+    "installation-repairs.html": "Installation or repair",
+    "drainage-installation.html": "Installation or repair",
+    "septic-tanks-treatment-plants.html": "Installation or repair",
+    "pump-station-installation.html": "Installation or repair",
+    "gully-interceptor-installation.html": "Installation or repair",
+    "pump-station-maintenance.html": "Pump station maintenance",
+    "tank-cleaning.html": "Tank cleaning or jetting",
+    "jetting-drain-cleaning.html": "Tank cleaning or jetting",
+    "cctv-drain-surveys.html": "CCTV drain survey",
+    "interceptor-gully-cleaning.html": "Interceptor or gully cleaning",
+    "tankering.html": "Tankering or liquid waste",
+    "liquid-waste.html": "Tankering or liquid waste",
+    "waste-management.html": "Food or hazardous waste",
+    "food-waste.html": "Food or hazardous waste",
+    "food-drink.html": "Food or hazardous waste",
+    "hazardous-waste.html": "Food or hazardous waste",
+    "emergency-flood-response.html": "Emergency or flooding",
+}
+
 # Old addresses that now live elsewhere
 REDIRECTS = {
     "civils-installations.html": "installation-repairs.html",
@@ -798,6 +821,7 @@ def build(out, preview=False):
         kw = dict(kw)
         kw["title"] = TITLES.get(path, kw["title"])
         kw["description"] = DESCRIPTIONS.get(path, kw["description"])
+        kw["service"] = SERVICE_DEFAULT.get(path)
         html = page(path=path, noindex=preview, **kw)
         with open(os.path.join(out, path), "w", encoding="utf-8") as f:
             f.write(html)
