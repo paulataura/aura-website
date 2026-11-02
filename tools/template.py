@@ -197,7 +197,8 @@ def page_hero(*, eyebrow, h1, lead, crumbs=None, image=None, image_alt="", prima
         crumb = f'<nav class="crumbs" aria-label="Breadcrumb">{trail}</nav>'
     img = image or DEFAULT_HERO
     alt = f' role="img" aria-label="{e(image_alt)}"' if image_alt else ' aria-hidden="true"'
-    return f'''<section class="page-hero"><div class="page-hero-bg" style="background-image:url('{img}')"{alt}></div><div class="page-hero-shade"></div><div class="wrap page-hero-inner"><div class="page-hero-copy">{crumb}<p class="eyebrow">{e(eyebrow)}</p><h1>{e(h1)}</h1><p class="lead">{e(lead)}</p>
+    pos = ";background-position:center 92%" if img.endswith(".svg") else ""
+    return f'''<section class="page-hero"><div class="page-hero-bg" style="background-image:url('{img}'){pos}"{alt}></div><div class="page-hero-shade"></div><div class="wrap page-hero-inner"><div class="page-hero-copy">{crumb}<p class="eyebrow">{e(eyebrow)}</p><h1>{e(h1)}</h1><p class="lead">{e(lead)}</p>
       <div class="hero-actions"><a class="button button-lime" href="{primary[1]}">{e(primary[0])}</a><a class="button button-dark" href="tel:{TEL}">Call {PHONE} <span aria-hidden="true">↗</span></a></div></div></div></section>'''
 
 

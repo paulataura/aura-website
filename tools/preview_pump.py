@@ -1,7 +1,7 @@
 """Builds the picture-led preview of the Pump station maintenance page into preview/."""
 import os, sys
 sys.path.insert(0, os.path.dirname(__file__))
-from template import page, page_hero, steps, reviews, faqs, faq_ld, nudge, PHONE
+from template import page, page_hero, split, steps, reviews, faqs, faq_ld, nudge, PHONE
 from visuals import icon_cards, photo_cards, image_row, pump_station_diagram, monitor_widget
 
 crumbs = [("Site Services", "site-services.html"), ("Pump station maintenance", "pump-station-maintenance.html")]
@@ -12,12 +12,12 @@ faq = [("How often should a pump station be serviced?", "It depends on the stati
 
 body = page_hero(eyebrow="Site services", h1="Pump station maintenance.",
                  lead="Planned servicing, wet well cleans and fast fault response, so your pump station keeps running and problems are caught early.",
-                 crumbs=crumbs, image="assets/stock-pumps-closeup.webp", image_alt="Pumps and pipework in a pumping station")
-body += image_row(image="assets/stock-pump-set.webp", alt_text="Duty and standby pumps with valves and pipework",
-                  eyebrow="Why servicing matters", head="Keep the station ready, not just running.",
-                  paras=["Pump stations fail when small things go unnoticed: a sticking float, a worn impeller, fat building up in the wet well. Regular servicing catches them before they become an overflow or an emergency.",
-                         "We look after domestic, commercial and adoptable stations."],
-                  ticks=["Planned servicing of pumps and controls", "Wet well cleaning and desilting", "Fault finding, repairs and emergency tankering"])
+                 crumbs=crumbs, image="assets/illus-pump-station.svg", image_alt="Illustration of a pump station compound with kiosk, telemetry and an engineer at the wet well")
+body += split("Keep the station ready, not just running.",
+              ["Pump stations fail when small things go unnoticed: a sticking float, a worn impeller, fat building up in the wet well. Regular servicing catches them before they become an overflow or an emergency.",
+               "We look after domestic, commercial and adoptable stations."],
+              ["Planned servicing of pumps and controls", "Wet well cleaning and desilting", "Float and alarm checks", "Fault finding and repairs", "Emergency tankering if a station fails", "Clear service reports"],
+              eyebrow="Why servicing matters")
 body += pump_station_diagram()
 body += icon_cards([("pump", "Pumps & controls", "Checking pump operation, duty and standby, control panels and kiosks."),
                     ("wetwell", "Wet well", "Inspecting and cleaning the wet well, floats and level controls."),
