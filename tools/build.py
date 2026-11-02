@@ -22,10 +22,18 @@ def add(path, **kw):
     PAGES[path] = kw
 
 
+HERO_BY_MENU = {"installation-repairs.html": IMG_DRAIN, "site-services.html": IMG_TANKER, "waste-management.html": IMG_TANKER}
+
+
+def other(img):
+    return IMG_DRAIN if img == IMG_PUMP else IMG_PUMP
+
+
 def service(path, *, menu, menu_href, title, description, eyebrow, h1, lead, image=None, image_alt="",
             intro_head, intro_paras, ticks, included_head, included, how, faq, review_keys=(), nudge_kw=None,
             related=None):
     crumbs = [(menu, menu_href), (h1.rstrip("."), path)] if menu else [(h1.rstrip("."), path)]
+    image = image or HERO_BY_MENU.get(menu_href, IMG_TANKER)
     body = page_hero(eyebrow=eyebrow, h1=h1, lead=lead, crumbs=crumbs, image=image, image_alt=image_alt)
     body += split(intro_head, intro_paras, ticks)
     body += cards(included, head=included_head, alt=True)
@@ -33,7 +41,7 @@ def service(path, *, menu, menu_href, title, description, eyebrow, h1, lead, ima
     if review_keys:
         body += reviews(list(review_keys), alt=True)
     if nudge_kw is not False:
-        body += nudge(**(nudge_kw or {}))
+        body += nudge(**{"image": other(image), **(nudge_kw or {})})
     if related:
         body += cards(related, head="Related services", cols=3, alt=not review_keys)
     body += faqs(faq, alt=bool(related) == bool(review_keys))
@@ -42,12 +50,13 @@ def service(path, *, menu, menu_href, title, description, eyebrow, h1, lead, ima
 
 def overview(path, *, title, description, eyebrow, h1, lead, image=None, image_alt="", items, why_head, why_paras, why_ticks, review_keys=(), faq=None):
     crumbs = [(h1.rstrip("."), path)]
+    image = image or IMG_TANKER
     body = page_hero(eyebrow=eyebrow, h1=h1, lead=lead, crumbs=crumbs, image=image, image_alt=image_alt)
     body += cards(items, head="What we can do for you", alt=True)
     body += split(why_head, why_paras, why_ticks)
     if review_keys:
         body += reviews(list(review_keys), alt=True)
-    body += nudge()
+    body += nudge(image=other(image))
     if faq:
         body += faqs(faq, alt=True)
     add(path, title=title, description=description, body=body, crumbs=crumbs, extra_ld=[faq_ld(faq)] if faq else None)
@@ -470,7 +479,7 @@ emer_faq = [("Are you really available 24/7?", f"Yes. Call {PHONE} day or night,
 body = page_hero(eyebrow="24/7 emergency response", h1="Emergency & flood response.",
                  lead="Flooding, pump failures, overflows, blockages and spills, day or night. Call and we'll arrange the right response straight away.",
                  crumbs=[("Site Services", "site-services.html"), ("Emergency & flood response", "emergency-flood-response.html")],
-                 primary=(f"Call {PHONE}", f"tel:{TEL}"))
+                 primary=(f"Call {PHONE}", f"tel:{TEL}"), image=IMG_DRAIN)
 body += split("Something gone wrong? We'll get it sorted.",
               ["When drainage fails, you need someone who answers the phone and takes charge. We arrange the right people and kit, deal with the immediate problem, then help you stop it happening again."],
               ["Pump station failures and alarms", "Flooding and floodwater removal", "Emergency tankers and overflows", "Blocked drains and sewers", "Oil, chemical and liquid spills", "Over-pumping and temporary measures"])
@@ -582,7 +591,7 @@ service("hazardous-waste.html", menu="Waste Management", menu_href="waste-manage
 # SECTORS
 # =====================================================================
 body = page_hero(eyebrow="Who we help", h1="Built around your kind of site.",
-                 lead="Every site is different. Choose yours to see how we can help.", crumbs=[("Sectors", "sectors.html")])
+                 lead="Every site is different. Choose yours to see how we can help.", crumbs=[("Sectors", "sectors.html")], image=IMG_DRAIN)
 body += cards([("Food & drink", "Food waste, tank cleaning and process liquid waste for food and drink producers.", "food-drink.html"),
                ("Commercial & industrial", "Interceptors, gullies, tanks and site drainage kept compliant and working.", "commercial-industrial.html"),
                ("Homes", "Septic tanks, treatment plants and private pump stations, installed and looked after.", "homes.html"),
@@ -594,11 +603,12 @@ add("sectors.html", title=f"Who We Help | {AREA} | ASG", description="Drainage, 
 
 def sector(path, *, name, title, description, h1, lead, image=None, image_alt="", challenge_head, challenge_paras, challenges, services, review_keys, faq):
     crumbs = [("Sectors", "sectors.html"), (name, path)]
+    image = image or IMG_DRAIN
     body = page_hero(eyebrow=name, h1=h1, lead=lead, crumbs=crumbs, image=image, image_alt=image_alt)
     body += split(challenge_head, challenge_paras, challenges)
     body += cards(services, head="How we can help", alt=True)
     body += reviews(list(review_keys))
-    body += nudge()
+    body += nudge(image=other(image))
     body += faqs(faq, alt=True)
     add(path, title=title, description=description, body=body, crumbs=crumbs, extra_ld=[faq_ld(faq)], current="sectors.html")
 
@@ -705,7 +715,7 @@ sector("estates.html", name="Estates & management companies",
 # ABOUT / CONTACT / PRIVACY
 # =====================================================================
 body = page_hero(eyebrow="About ASG", h1="Problem solvers, not just a contractor.",
-                 lead="Aura Solutions Group looks after the systems beneath your site: pump stations, drainage, tanks and the waste they produce.", crumbs=[("About", "about.html")])
+                 lead="Aura Solutions Group looks after the systems beneath your site: pump stations, drainage, tanks and the waste they produce.", crumbs=[("About", "about.html")], image=IMG_PUMP)
 body += split("We learn your site, not just the job.",
               ["We started ASG because too many sites were let down by contractors who turned up, did the minimum and left. We wanted to work differently.",
                "We take time to understand how each site operates and what it relies on. We look at the bigger picture, tell you honestly what we find, good or bad, and work with you to put it right.",
@@ -716,7 +726,7 @@ add("about.html", title=f"About Aura Solutions Group | {AREA}", description="Aur
     body=body, crumbs=[("About", "about.html")])
 
 body = page_hero(eyebrow="Contact", h1="Let's talk about your site.",
-                 lead=f"Call us on {PHONE}, email info@aurasolutions.co.uk or send the form below. For emergencies, always call.", crumbs=[("Contact", "contact.html")])
+                 lead=f"Call us on {PHONE}, email info@aurasolutions.co.uk or send the form below. For emergencies, always call.", crumbs=[("Contact", "contact.html")], image=IMG_DRAIN)
 add("contact.html", title=f"Contact Aura Solutions Group | {AREA}", description=f"Contact Aura Solutions Group for drainage, pump station and liquid waste services across Evesham and Worcestershire. 24/7 emergency line {PHONE}.",
     body=body, crumbs=[("Contact", "contact.html")])
 

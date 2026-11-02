@@ -184,17 +184,21 @@ def page(*, path, title, description, body, current=None, crumbs=None, noindex=F
 
 # ---------- building blocks used by the content file ----------
 
+DEFAULT_HERO = "assets/liquid-waste-collection-final.webp"
+
+
 def page_hero(*, eyebrow, h1, lead, crumbs=None, image=None, image_alt="", primary=("Talk to an expert", "#enquire")):
+    """Full-width heading with a faded photo behind it (like the homepage)."""
     crumb = ""
     if crumbs:
         trail = '<a href="index.html">Home</a>' + "".join(
             f'<span aria-hidden="true">/</span>' + (f'<a href="{h}">{e(n)}</a>' if i < len(crumbs) - 1 else f'{e(n)}')
             for i, (n, h) in enumerate(crumbs))
         crumb = f'<nav class="crumbs" aria-label="Breadcrumb">{trail}</nav>'
-    img = f'<div class="page-hero-image"><img src="{image}" alt="{e(image_alt)}" width="1600" height="1000" fetchpriority="high"></div>' if image else ""
-    cls = "page-hero" + ("" if image else " no-image")
-    return f'''<section class="{cls}"><div class="wrap page-hero-inner"><div>{crumb}<p class="eyebrow">{e(eyebrow)}</p><h1>{e(h1)}</h1><p class="lead">{e(lead)}</p>
-      <div class="hero-actions"><a class="button button-lime" href="{primary[1]}">{e(primary[0])}</a><a class="button button-dark" href="tel:{TEL}">Call {PHONE} <span aria-hidden="true">↗</span></a></div></div>{img}</div></section>'''
+    img = image or DEFAULT_HERO
+    alt = f' role="img" aria-label="{e(image_alt)}"' if image_alt else ' aria-hidden="true"'
+    return f'''<section class="page-hero"><div class="page-hero-bg" style="background-image:url('{img}')"{alt}></div><div class="page-hero-shade"></div><div class="wrap page-hero-inner"><div class="page-hero-copy">{crumb}<p class="eyebrow">{e(eyebrow)}</p><h1>{e(h1)}</h1><p class="lead">{e(lead)}</p>
+      <div class="hero-actions"><a class="button button-lime" href="{primary[1]}">{e(primary[0])}</a><a class="button button-dark" href="tel:{TEL}">Call {PHONE} <span aria-hidden="true">↗</span></a></div></div></div></section>'''
 
 
 def cards(items, head=None, intro=None, alt=False, cols=3, eyebrow=None):
@@ -215,7 +219,7 @@ def cards(items, head=None, intro=None, alt=False, cols=3, eyebrow=None):
 def steps(items, head="How it works", alt=False, eyebrow=None):
     s = "".join(f'<div class="step"><span>0{i}</span><h3>{e(t)}</h3><p>{e(d)}</p></div>' for i, (t, d) in enumerate(items, 1))
     eb = f'<p class="eyebrow">{e(eyebrow)}</p>' if eyebrow else ""
-    return f'<section class="block{" alt" if alt else ""}"><div class="wrap"><div class="block-head">{eb}<h2>{e(head)}</h2></div><div class="steps">{s}</div></div></section>'
+    return f'<section class="block dark"><div class="wrap"><div class="block-head">{eb}<h2>{e(head)}</h2></div><div class="steps">{s}</div></div></section>'
 
 
 def split(head, paras, ticks, eyebrow=None, alt=False):
@@ -239,8 +243,10 @@ def faq_ld(items):
     return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in items]}
 
 
-def nudge(head="Want us to look after it for you?", text="Many customers start with one job. Once we know your site, we can take care of all of it under one asset management agreement.", link=("How asset management works", "asset-management.html")):
-    return f'<section class="block"><div class="wrap"><div class="nudge"><div><h2>{e(head)}</h2><p>{e(text)}</p></div><a class="button button-lime" href="{link[1]}">{e(link[0])} <span aria-hidden="true">↗</span></a></div></div></section>'
+def nudge(head="Want us to look after it for you?", text="Many customers start with one job. Once we know your site, we can take care of all of it under one asset management agreement.", link=("How asset management works", "asset-management.html"), image="assets/pump-station-final.webp"):
+    """Full-width photo band with a dark green overlay."""
+    return (f'<section class="band" style="background-image:url(\'{image}\')"><div class="band-shade"></div><div class="wrap band-inner"><div><p class="eyebrow">One partner for the whole site</p><h2>{e(head)}</h2><p>{e(text)}</p></div>'
+            f'<div class="band-actions"><a class="button button-lime" href="{link[1]}">{e(link[0])} <span aria-hidden="true">↗</span></a><a class="button button-outline-light" href="#enquire">Talk to an expert</a></div></div></section>')
 
 
 def redirect(to):
