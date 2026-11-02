@@ -7,6 +7,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
+from visuals import icon_cards, photo_cards, image_row, pump_station_diagram, monitor_widget
 from template import (page, page_hero, cards, steps, split, reviews, faqs, faq_ld, nudge,
                       redirect, review_html, e, TEL, PHONE)
 
@@ -325,31 +326,40 @@ overview("site-services.html",
          why_ticks=["Access to a wide network of specialist kit", "Planned or same-day attendance", "Clear reports after every job", "Waste handled and documented properly", "24/7 emergency line"],
          review_keys=("commercial", "warehouse"))
 
-service("pump-station-maintenance.html", menu="Site Services", menu_href="site-services.html",
-        title=f"Pump Station Maintenance & Servicing | {AREA} | ASG",
-        description="Pump station maintenance, servicing, wet well cleaning and 24/7 fault response for domestic, commercial and adoptable pumping stations across Worcestershire.",
-        eyebrow="Site services", h1="Pump station maintenance.",
-        lead="Planned servicing, wet well cleans and fast fault response, so your pump station keeps running and problems are caught early.",
-        image=IMG_PUMP, image_alt="Wastewater treatment works with pumps and pipework",
-        intro_head="Keep the station ready, not just running.",
-        intro_paras=["Pump stations fail when small things go unnoticed: a sticking float, a worn impeller, fat building up in the wet well. Regular servicing catches them before they become an overflow or an emergency.",
-                     "We look after domestic, commercial and adoptable stations, and can add telemetry where it helps you see what's happening between visits."],
-        ticks=["Planned servicing of pumps and controls", "Wet well cleaning and desilting", "Float and alarm checks", "Fault finding and repairs", "Emergency tankering if a station fails", "Clear service reports"],
-        included_head="What a service covers",
-        included=[("Pumps & controls", "Checking pump operation, duty and standby, control panels and kiosks."),
-                  ("Wet well", "Inspecting and cleaning the wet well, floats and level controls."),
-                  ("Report & advise", "A clear report of what we found, did and recommend next.")],
-        how=[("Review", "We look at the station, its equipment and service history."),
-             ("Service", "We service on a schedule that suits the station and its use."),
-             ("Respond", "If something fails, we arrange the right response quickly.")],
-        faq=[("How often should a pump station be serviced?", "It depends on the station and how it's used. Most need servicing at least once or twice a year, and busier or adoptable stations more often."),
-             ("Can you take over an existing pump station?", "Yes. We'll review its condition and history first and tell you honestly what needs doing."),
-             ("Can you work with our current telemetry?", "Often, yes. Tell us what's installed and we'll check."),
-             ("What if a pump stops at the weekend?", f"Call our 24/7 line on {PHONE}. We'll arrange attendance and emergency tankering if needed.")],
-        review_keys=("homeowner", "telemetry"),
-        related=[("Pump station installation", "New and adoptable stations.", "pump-station-installation.html"),
-                 ("Tankering & emergency tankers", "When a station needs pumping out.", "tankering.html"),
-                 ("Asset management", "Long-term care for your station.", "asset-management.html")])
+# Pump station maintenance: picture-led layout with the cutaway diagram (approved 2 Nov)
+_psm_crumbs = [("Site Services", "site-services.html"), ("Pump station maintenance", "pump-station-maintenance.html")]
+_psm_faq = [("How often should a pump station be serviced?", "It depends on the station and how it's used. Most need servicing at least once or twice a year, and busier or adoptable stations more often."),
+            ("Can you take over an existing pump station?", "Yes. We'll review its condition and history first and tell you honestly what needs doing."),
+            ("Can you work with our current telemetry?", "Often, yes. Tell us what's installed and we'll check."),
+            ("What if a pump stops at the weekend?", f"Call our 24/7 line on {PHONE}. We'll arrange attendance and emergency tankering if needed.")]
+body = page_hero(eyebrow="Site services", h1="Pump station maintenance.",
+                 lead="Planned servicing, wet well cleans and fast fault response, so your pump station keeps running and problems are caught early.",
+                 crumbs=_psm_crumbs, image="assets/photo-wet-well.webp", image_alt="Looking down into a pump station wet well with float switch and pipework")
+body += split("Keep the station ready, not just running.",
+              ["Pump stations fail when small things go unnoticed: a sticking float, a worn impeller, fat building up in the wet well. Regular servicing catches them before they become an overflow or an emergency.",
+               "We look after domestic, commercial and adoptable stations."],
+              ["Planned servicing of pumps and controls", "Wet well cleaning and desilting", "Float and alarm checks", "Fault finding and repairs", "Emergency tankering if a station fails", "Clear service reports"],
+              eyebrow="Why servicing matters")
+body += pump_station_diagram()
+body += icon_cards([("pump", "Pumps & controls", "Checking pump operation, duty and standby, control panels and kiosks."),
+                    ("wetwell", "Wet well", "Inspecting and cleaning the wet well, floats and level controls."),
+                    ("report", "Report & advise", "A clear report of what we found, did and recommend next.")],
+                   head="What a service covers")
+body += steps([("Review", "We look at the station, its equipment and service history."),
+               ("Service", "We service on a schedule that suits the station and its use."),
+               ("Respond", "If something fails, we arrange the right response quickly.")])
+body += image_row(visual_html=monitor_widget(), eyebrow="Telemetry", head="See what's happening between visits.",
+                  paras=["Telemetry is a tool we can add to any station we look after. It shows pump states and levels, sends an alert when something changes, and collects the data behind your reports."],
+                  ticks=["Alarms before small faults become call-outs", "Monthly performance reports", "Works with many existing systems"], reverse=True)
+body += reviews(["homeowner", "telemetry"], alt=True)
+body += nudge(image="assets/stock-control-panel.webp")
+body += photo_cards([(IMG_PUMP, "Pump station installation", "New and adoptable pumping stations.", "pump-station-installation.html"),
+                     (IMG_TANKER, "Tankering & emergency tankers", "When a station needs pumping out.", "tankering.html"),
+                     ("assets/stock-control-panel.webp", "Asset management", "Long-term care for your station.", "asset-management.html")], head="Related services")
+body += faqs(_psm_faq, alt=True)
+add("pump-station-maintenance.html", title="Pump Station Maintenance & Servicing | Worcestershire | ASG",
+    description="Pump station maintenance, servicing, wet well cleaning and 24/7 fault response for domestic, commercial and adoptable pumping stations across Worcestershire.",
+    body=body, crumbs=_psm_crumbs, extra_ld=[faq_ld(_psm_faq)], current="site-services.html", og_image="assets/photo-wet-well.webp")
 
 service("tank-cleaning.html", menu="Site Services", menu_href="site-services.html",
         title=f"Tank Cleaning: Storage, Process & Septic Tanks | {AREA} | ASG",
