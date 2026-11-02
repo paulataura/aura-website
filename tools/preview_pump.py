@@ -12,7 +12,7 @@ faq = [("How often should a pump station be serviced?", "It depends on the stati
 
 body = page_hero(eyebrow="Site services", h1="Pump station maintenance.",
                  lead="Planned servicing, wet well cleans and fast fault response, so your pump station keeps running and problems are caught early.",
-                 crumbs=crumbs, image="assets/illus-pump-station.svg", image_alt="Illustration of a pump station compound with kiosk, telemetry and an engineer at the wet well")
+                 crumbs=crumbs, image="assets/photo-wet-well.webp", image_alt="Looking down into a pump station wet well with float switch and pipework")
 body += split("Keep the station ready, not just running.",
               ["Pump stations fail when small things go unnoticed: a sticking float, a worn impeller, fat building up in the wet well. Regular servicing catches them before they become an overflow or an emergency.",
                "We look after domestic, commercial and adoptable stations."],
